@@ -1,0 +1,379 @@
+.wrap {
+  min-height: var(--app-height);
+  background: var(--bg);
+  position: relative;
+}
+
+/* Gallery */
+.gallery {
+  position: relative;
+  height: 280px;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.dotActive { background: #fff; }
+
+.fav, .share {
+  position: absolute;
+  top: 12px;
+  font-size: 18px;
+  background: rgba(0,0,0,0.35);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.fav   { right: 12px; }
+.share { right: 58px; }
+
+.badge {
+  position: absolute;
+  bottom: 10px;
+  left: 14px;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.badgeFree { background: rgba(0,180,80,0.85); color: #fff; }
+.badgeBusy { background: rgba(200,0,0,0.75);  color: #fff; }
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  color: #fff;
+  background: rgba(0,0,0,0.3);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.navPrev { left: 10px; }
+.navNext { right: 10px; }
+
+/* Content */
+.content {
+  padding: 16px 16px 0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 12px;
+}
+
+.desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 20px;
+}
+
+.sectionTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+
+/* Amenities */
+.amenities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.amenity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text2);
+  background: var(--secondary-bg, var(--bg));
+  border: 1px solid var(--separator);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+.amenityIcon { font-size: 18px; }
+.amenityLabel { font-size: 13px; }
+
+/* Rules */
+.rules {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text2);
+}
+
+/* Owner */
+.owner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ownerAvatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ownerPhoto {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.ownerInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ownerName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.verified { color: var(--accent); }
+
+.ownerStats {
+  font-size: 12px;
+  color: var(--hint);
+}
+
+.ownerContact {
+  background: none;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 20px;
+  padding: 6px 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Контакты */
+.contacts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.contactBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  background: #25d366;
+  color: #fff;
+}
+.contactBtn:last-child {
+  background: var(--accent);
+}
+
+/* Ценовой календарь */
+.priceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.priceCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 6px;
+  border-radius: 12px;
+  gap: 2px;
+}
+
+.priceCellHigh  { background: #fff3e0; }
+.priceCellMid   { background: #e8f5e9; }
+.priceCellLow   { background: #f5f5f5; }
+
+.priceCellMonth { font-size: 12px; color: var(--hint); font-weight: 500; }
+.priceCellPrice { font-size: 18px; font-weight: 700; color: var(--text); }
+.priceCellUnit  { font-size: 10px; color: var(--hint); }
+
+.priceExtras {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text2);
+  padding: 8px 4px 0;
+}
+
+/* FAQ кнопка */
+.faqBtn {
+  width: 100%;
+  padding: 14px;
+  border: 1.5px solid var(--separator);
+  border-radius: 12px;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+/* Price table */
+.priceTable {
+  border: 1px solid var(--separator);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text2);
+  border-bottom: 1px solid var(--separator);
+}
+.priceRow:last-child { border-bottom: none; }
+
+.priceTotal {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--secondary-bg, var(--bg));
+}
+
+.noDates {
+  font-size: 13px;
+  color: var(--hint);
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+.footerSpacer { height: 90px; }
+
+/* Sticky footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: var(--bg);
+  border-top: 1px solid var(--separator);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footerPrice {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footerPriceMain {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+.footerPriceMain small { font-size: 13px; font-weight: 400; color: var(--text2); }
+
+.footerPriceTotal {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.bookBtn {
+  flex-shrink: 0;
+  height: 48px;
+  padding: 0 24px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.bookBtn:disabled {
+  background: var(--hint);
+  cursor: default;
+}

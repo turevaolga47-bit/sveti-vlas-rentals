@@ -1,0 +1,111 @@
+/* ============================================
+   Sveti Vlas Rentals — Global Styles
+   Только Telegram CSS-переменные, никаких хардкод цветов
+   ============================================ */
+
+:root {
+  --bg:        var(--tg-theme-bg-color, #ffffff);
+  --bg2:       var(--tg-theme-secondary-bg-color, #f4f4f5);
+  --text:      var(--tg-theme-text-color, #111111);
+  --text2:     var(--tg-theme-subtitle-text-color, #6d6d72);
+  --accent:    var(--tg-theme-button-color, #2481cc);
+  --accent-t:  var(--tg-theme-button-text-color, #ffffff);
+  --hint:      var(--tg-theme-hint-color, #aaaaaa);
+  --link:      var(--tg-theme-link-color, #2481cc);
+  --danger:    var(--tg-theme-destructive-text-color, #ff3b30);
+  --separator: var(--tg-theme-section-separator-color, #e5e5ea);
+  --header-bg: var(--tg-theme-header-bg-color, #f8f8f8);
+
+  /* Высота — ВСЕГДА stable, не vh */
+  --app-height: var(--tg-viewport-stable-height, 100dvh);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.screen {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a { color: var(--link); text-decoration: none; }
+
+/* ---- Skeleton shimmer ---- */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--bg2) 25%,
+    var(--separator) 50%,
+    var(--bg2) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 12px;
+}
+
+/* ---- Toast уведомление ---- */
+.toast {
+  position: fixed;
+  bottom: calc(var(--app-height) * 0.12 + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  z-index: 1000;
+  pointer-events: none;
+  animation: fadeInOut 2s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  15%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+  75%  { opacity: 1; }
+  100% { opacity: 0; }
+}

@@ -1,0 +1,196 @@
+.wrap {
+  background: var(--bg);
+  padding: 20px 16px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Хозяйка */
+.ownerCard {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  background: var(--bg);
+  border: 1px solid var(--separator);
+  border-radius: 16px;
+}
+
+.ownerPhoto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--accent);
+}
+
+.ownerInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ownerName {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.verified { color: var(--accent); }
+
+.ownerDesc {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+/* Контакты */
+.contactsBlock {
+  border: 1px solid var(--separator);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.contactsTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--hint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 16px 8px;
+  margin: 0;
+}
+
+.contactsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  text-decoration: none;
+  border-top: 1px solid var(--separator);
+}
+
+.contactDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-color, var(--accent));
+  flex-shrink: 0;
+}
+
+.contactIcon { font-size: 22px; }
+
+.contactText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.contactLabel {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.contactSub {
+  font-size: 12px;
+  color: var(--hint);
+}
+
+.contactArrow {
+  font-size: 20px;
+  color: var(--hint);
+}
+
+/* Гость */
+.userCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--bg);
+  border: 1px solid var(--separator);
+  border-radius: 14px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--separator);
+  color: var(--hint);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.userName {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.userHandle {
+  font-size: 13px;
+  color: var(--hint);
+}
+
+/* Меню */
+.menu {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--separator);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--separator);
+  cursor: pointer;
+  text-align: left;
+  min-height: 0;
+}
+.menuItem:last-child { border-bottom: none; }
+
+.menuIcon { font-size: 20px; }
+.menuLabel { flex: 1; font-size: 14px; color: var(--text); }
+.menuArrow { font-size: 18px; color: var(--hint); }
+
+.appInfo {
+  margin-top: auto;
+  text-align: center;
+  font-size: 12px;
+  color: var(--hint);
+  line-height: 1.6;
+}
+
+.version { font-size: 11px; opacity: 0.7; }

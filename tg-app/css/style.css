@@ -1,0 +1,68 @@
+/* =============================================
+   Apartment Rentals — Sveti Vlas TMA
+   Все цвета через Telegram CSS-переменные
+   ============================================= */
+
+:root {
+  --bg:        var(--tg-theme-bg-color, #ffffff);
+  --bg2:       var(--tg-theme-secondary-bg-color, #f4f4f5);
+  --text:      var(--tg-theme-text-color, #111111);
+  --text2:     var(--tg-theme-subtitle-text-color, #8e8e93);
+  --accent:    var(--tg-theme-button-color, #2481cc);
+  --accent-t:  var(--tg-theme-button-text-color, #ffffff);
+  --hint:      var(--tg-theme-hint-color, #aaaaaa);
+  --link:      var(--tg-theme-link-color, #2481cc);
+  --danger:    var(--tg-theme-destructive-text-color, #ff3b30);
+  --height:    var(--tg-viewport-stable-height, 100dvh);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  height: var(--height);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ---- Скелетон загрузки ---- */
+.skeleton {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton__card {
+  height: 220px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, var(--bg2) 25%, var(--hint) 50%, var(--bg2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ---- Экраны ---- */
+.screen {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

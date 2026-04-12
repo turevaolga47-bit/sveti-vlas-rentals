@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "name": "APARTMENT RENTALS — Святой Влас",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+      "*.code-workspace": ".gitignore, .gitkeep",
+      "package.json": "package-lock.json, yarn.lock, .npmrc, vite.config.*",
+      "index.html": "*.html"
+    },
+    "explorer.sortOrder": "foldersNestsFiles",
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#1a1a2e",
+      "sideBar.background": "#16213e",
+      "sideBarSectionHeader.background": "#0f3460",
+      "sideBarSectionHeader.foreground": "#e0e0e0"
+    },
+    "files.exclude": {
+      "**/.gitkeep": true,
+      "**/node_modules": true
+    }
+  }
+}
