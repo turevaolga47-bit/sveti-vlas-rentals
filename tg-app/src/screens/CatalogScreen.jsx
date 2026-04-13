@@ -1,19 +1,23 @@
 import { useState } from 'react'
 import useStore from '../store/useStore'
+import { useLang } from '../i18n/useLang'
 import { APARTMENTS } from '../data/apartments'
 import ApartmentCard from '../components/ApartmentCard'
 import styles from './CatalogScreen.module.css'
 
-const FILTERS = [
-  { id: 'all',   label: 'Все' },
-  { id: 'free',  label: '✓ Свободно' },
-  { id: 'park',  label: '🅿️ Паркинг' },
-  { id: 'ac',    label: '❄️ Кондиционер' },
-]
-
 export default function CatalogScreen() {
   const { dateFrom, dateTo, navigate } = useStore()
+  const { t, lang, setLang, LANG_META } = useLang()
   const [filter, setFilter] = useState('all')
+
+  const FILTERS = [
+    { id: 'all',  label: t.catalog.filters.all },
+    { id: 'free', label: `✓ ${t.catalog.filters.free}` },
+    { id: 'park', label: `🅿️ ${t.catalog.filters.parking}` },
+    { id: 'ac',   label: `❄️ ${t.catalog.filters.ac}` },
+  ]
+
+  const locale = lang === 'de' ? 'de-DE' : lang === 'en' ? 'en-GB' : 'ru-RU'
 
   const filtered = APARTMENTS.filter((a) => {
     if (filter === 'free') return a.available
@@ -24,17 +28,28 @@ export default function CatalogScreen() {
 
   return (
     <div className={styles.wrap}>
-      {/* Header */}
       <div className={styles.header}>
-        <h2 className={styles.title}>Квартиры</h2>
-        <button className={styles.datesBtn} onClick={() => navigate('dates')}>
-          {dateFrom && dateTo
-            ? `${new Date(dateFrom).toLocaleDateString('ru-RU', { day:'numeric', month:'short' })} — ${new Date(dateTo).toLocaleDateString('ru-RU', { day:'numeric', month:'short' })}`
-            : '📅 Выбрать даты'}
-        </button>
+        <h2 className={styles.title}>{t.catalog.title}</h2>
+        <div className={styles.headerRight}>
+          <div className={styles.langBtns}>
+            {Object.entries(LANG_META).map(([code, meta]) => (
+              <button
+                key={code}
+                className={`${styles.langBtn} ${lang === code ? styles.langBtnActive : ''}`}
+                onClick={() => setLang(code)}
+              >
+                {meta.flag}
+              </button>
+            ))}
+          </div>
+          <button className={styles.datesBtn} onClick={() => navigate('dates')}>
+            {dateFrom && dateTo
+              ? `${new Date(dateFrom).toLocaleDateString(locale, { day:'numeric', month:'short' })} — ${new Date(dateTo).toLocaleDateString(locale, { day:'numeric', month:'short' })}`
+              : '📅 ' + t.dates.title}
+          </button>
+        </div>
       </div>
 
-      {/* Filter chips */}
       <div className={styles.chips}>
         {FILTERS.map((f) => (
           <button
@@ -47,17 +62,15 @@ export default function CatalogScreen() {
         ))}
       </div>
 
-      {/* Cards */}
       <div className={styles.list}>
         {filtered.length === 0 ? (
-          <p className={styles.empty}>Нет квартир по выбранному фильтру</p>
+          <p className={styles.empty}>{t.catalog.empty}</p>
         ) : (
           filtered.map((apt) => (
             <ApartmentCard key={apt.id} apartment={apt} />
           ))
         )}
       </div>
-
     </div>
   )
 }

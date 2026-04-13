@@ -1,157 +1,56 @@
+import { useLang } from '../i18n/useLang'
 import NavHeader from '../components/NavHeader'
 import styles from './FAQScreen.module.css'
 
 const WHATSAPP = '4917675765576'
 
-const FAQS = [
-  {
-    category: '✈️ Виза и въезд',
-    items: [
-      {
-        q: 'Нужна ли виза в Болгарию?',
-        a: 'Болгария вошла в Шенгенскую зону в 2024 году (воздушные и морские границы). Для въезда обязательна действующая шенгенская виза (тип C или D) или национальная болгарская виза. Без визы въезд невозможен.',
-      },
-      {
-        q: 'Как получить шенгенскую визу?',
-        a: 'Обратитесь в визовый центр любой страны Шенгена. Проще всего оформить через Германию, Францию или Испанию. Срок оформления — 2–4 недели. Рекомендуем подавать заранее.',
-      },
-      {
-        q: 'Подходит ли шенгенская виза другой страны?',
-        a: 'Да. Любая действующая шенгенская виза категории C или D позволяет въехать в Болгарию через аэропорт.',
-      },
-    ],
-  },
-  {
-    category: '🚗 Трансфер',
-    items: [
-      {
-        q: 'Как добраться из аэропорта?',
-        a: 'Ближайший аэропорт — Бургас (BOJ), 30–40 минут до Святого Власа. Мы организуем трансфер по запросу. Напишите в WhatsApp заранее, укажите дату и рейс.',
-      },
-      {
-        q: 'Сколько стоит трансфер?',
-        a: 'Стоимость зависит от месяца. В сезон — от €40 и выше. Напишите в WhatsApp, согласуем цену и время.',
-      },
-      {
-        q: 'Можно ли заказать такси самостоятельно?',
-        a: 'Да, в Болгарии работают приложения Bolt и местные таксопарки. Но наш трансфер надёжнее — водитель встретит вас с табличкой.',
-      },
-    ],
-  },
-  {
-    category: '🏠 Заселение',
-    items: [
-      {
-        q: 'Время заезда и выезда?',
-        a: 'Заезд с 14:00, выезд до 12:00. Ранний заезд или поздний выезд — по согласованию, напишите заранее.',
-      },
-      {
-        q: 'Как происходит заселение?',
-        a: 'Заселение провожу я лично. Встречаю вас, показываю квартиру и передаю ключи в руки.',
-      },
-      {
-        q: 'Подписывается ли договор?',
-        a: 'Да. При заселении подписываем официальный договор аренды. При выезде — акт приёма-передачи квартиры.',
-      },
-      {
-        q: 'Что входит в стоимость?',
-        a: 'Постельное бельё, полотенца, Wi-Fi, паркинг, кондиционер, полностью оснащённая кухня (посуда, плита, микроволновка, холодильник), стиральная машина.',
-      },
-      {
-        q: 'Что такое депозит?',
-        a: 'Депозит €100 — возвратный. Берётся при заселении и возвращается при выезде после проверки квартиры.',
-      },
-    ],
-  },
-  {
-    category: '🛍 Инфраструктура',
-    items: [
-      {
-        q: 'Есть ли рядом магазины?',
-        a: 'Да! Базар с продуктами — в 50 метрах от дома. Супермаркет — в 5 минутах пешком. Всё под рукой.',
-      },
-      {
-        q: 'Где можно поесть?',
-        a: 'Рядом очень много ресторанов — на любой вкус и бюджет. Болгарская кухня, морепродукты, европейская кухня — всё в шаговой доступности.',
-      },
-      {
-        q: 'Квартиры новые или старые?',
-        a: 'Квартиры новые — это новостройка. Современный ремонт, новая мебель и техника, всё полностью укомплектовано. Сделано с душой.',
-      },
-    ],
-  },
-  {
-    category: '📋 Правила',
-    items: [
-      {
-        q: 'Можно ли курить?',
-        a: 'Курение в квартире запрещено. Штраф €100. Курить можно на улице.',
-      },
-      {
-        q: 'Можно ли с животными?',
-        a: 'Нет, размещение с животными запрещено. Штраф €100.',
-      },
-      {
-        q: 'Можно ли с детьми?',
-        a: 'Да, дети от 7 лет. Квартира расположена на этаже с лифтом, безопасно.',
-      },
-      {
-        q: 'Минимальный срок аренды?',
-        a: 'Минимум 3 ночи. В высокий сезон (июль–август) — от 7 ночей.',
-      },
-      {
-        q: 'Можно ли снять на месяц?',
-        a: 'Да, долгосрочная аренда возможна. Условия и цена обсуждаются лично с хозяйкой — напишите в WhatsApp.',
-      },
-    ],
-  },
-]
-
 export default function FAQScreen() {
+  const { t } = useLang()
+
   return (
     <div className={styles.wrap}>
-      <NavHeader title="Частые вопросы" />
+      <NavHeader title={t.faq.title} />
       <div className={styles.inner}>
 
-      {/* WhatsApp CTA */}
-      <a
-        href={`https://wa.me/${WHATSAPP}`}
-        className={styles.waCta}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <span className={styles.waIcon}>💬</span>
-        <div className={styles.waText}>
-          <span className={styles.waTitle}>Задать вопрос хозяйке</span>
-          <span className={styles.waSub}>WhatsApp · Ольга</span>
-        </div>
-        <span className={styles.waArrow}>›</span>
-      </a>
-
-      {/* FAQ groups */}
-      {FAQS.map((group) => (
-        <section key={group.category} className={styles.group}>
-          <h3 className={styles.groupTitle}>{group.category}</h3>
-          <div className={styles.items}>
-            {group.items.map((item) => (
-              <FAQItem key={item.q} q={item.q} a={item.a} />
-            ))}
-          </div>
-        </section>
-      ))}
-
-      {/* Bottom contact */}
-      <div className={styles.bottomContact}>
-        <p>Не нашли ответ?</p>
+        {/* WhatsApp CTA */}
         <a
           href={`https://wa.me/${WHATSAPP}`}
-          className={styles.waBtn}
+          className={styles.waCta}
           target="_blank"
           rel="noreferrer"
         >
-          Написать в WhatsApp
+          <span className={styles.waIcon}>💬</span>
+          <div className={styles.waText}>
+            <span className={styles.waTitle}>{t.faq.waTitle}</span>
+            <span className={styles.waSub}>{t.faq.waSub}</span>
+          </div>
+          <span className={styles.waArrow}>›</span>
         </a>
-      </div>
+
+        {/* FAQ groups */}
+        {t.faq.faqs.map((group) => (
+          <section key={group.category} className={styles.group}>
+            <h3 className={styles.groupTitle}>{group.category}</h3>
+            <div className={styles.items}>
+              {group.items.map((item) => (
+                <FAQItem key={item.q} q={item.q} a={item.a} />
+              ))}
+            </div>
+          </section>
+        ))}
+
+        {/* Bottom contact */}
+        <div className={styles.bottomContact}>
+          <p>{t.faq.notFound}</p>
+          <a
+            href={`https://wa.me/${WHATSAPP}`}
+            className={styles.waBtn}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t.faq.waBtn}
+          </a>
+        </div>
       </div>
     </div>
   )

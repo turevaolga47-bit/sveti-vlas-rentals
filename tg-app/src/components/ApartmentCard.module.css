@@ -50,17 +50,6 @@
   justify-content: center;
 }
 
-.badge {
-  position: absolute;
-  bottom: 8px;
-  left: 12px;
-  background: rgba(0,0,0,0.55);
-  color: #fff;
-  font-size: 12px;
-  padding: 3px 10px;
-  border-radius: 20px;
-}
-
 /* Информация */
 .info { padding: 12px 14px 14px; }
 
@@ -84,6 +73,45 @@
   gap: 6px;
   font-size: 16px;
   margin-bottom: 8px;
+}
+
+.badge {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.badgeFree { background: rgba(0,180,80,0.85); color: #fff; }
+.badgeBusy { background: rgba(200,0,0,0.75); color: #fff; }
+
+/* Хозяйка */
+.ownerRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.ownerAvatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.ownerName {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+.ownerBookings {
+  font-size: 12px;
+  color: var(--text2);
+}
+.ownerStars {
+  font-size: 12px;
+  margin-left: auto;
 }
 
 .price {

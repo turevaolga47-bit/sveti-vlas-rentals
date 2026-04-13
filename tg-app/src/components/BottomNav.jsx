@@ -1,14 +1,16 @@
 import useStore from '../store/useStore'
+import { useLang } from '../i18n/useLang'
 import styles from './BottomNav.module.css'
-
-const TABS = [
-  { id: 'catalog', label: 'Квартиры',  icon: '🏠' },
-  { id: 'bookings', label: 'Мои брони', icon: '📋' },
-  { id: 'profile',  label: 'Профиль',   icon: '👤' },
-]
 
 export default function BottomNav() {
   const { screen, navigate } = useStore()
+  const { t } = useLang()
+
+  const TABS = [
+    { id: 'catalog',  label: t.nav.catalog,   icon: '🏠' },
+    { id: 'bookings', label: t.nav.bookings,   icon: '📋' },
+    { id: 'profile',  label: t.nav.profile,    icon: '👤' },
+  ]
 
   return (
     <nav className={styles.nav}>

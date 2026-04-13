@@ -324,14 +324,207 @@
   text-align: center;
 }
 
+/* УТП полоска */
+.utpRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 0 4px;
+  margin-bottom: 8px;
+}
+.utpItem {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.utpDot {
+  font-size: 11px;
+  color: var(--hint);
+}
+
+/* Депозит подсказка */
+.depositNote {
+  font-size: 12px;
+  color: var(--hint);
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  background: var(--secondary-bg, var(--bg));
+  border-radius: 8px;
+  border: 1px solid var(--separator);
+}
+
+/* Блок оплаты */
+.paymentBlock {
+  border: 1px solid var(--separator);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.paymentRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--separator);
+}
+.paymentRow:last-child { border-bottom: none; }
+.paymentIcon { font-size: 22px; flex-shrink: 0; }
+.paymentInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.paymentName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.paymentDesc {
+  font-size: 12px;
+  color: var(--text2);
+}
+.paymentBtn {
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ibanRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.ibanNum {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.03em;
+  font-family: monospace;
+}
+
+.ibanCopyBtn {
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+
+.ibanBic {
+  font-size: 11px;
+  color: var(--hint);
+  margin-top: 2px;
+}
+
+.paymentSoon {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--hint);
+  background: var(--secondary-bg, var(--bg));
+  border: 1px solid var(--separator);
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* Расширенные данные хозяйки */
+.ownerTagline {
+  font-size: 12px;
+  color: var(--hint);
+  margin-top: 2px;
+}
+
+/* Отзывы */
+.reviewCount {
+  font-weight: 400;
+  color: var(--text2);
+  font-size: 14px;
+}
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.reviewCard {
+  background: var(--secondary-bg, var(--bg));
+  border: 1px solid var(--separator);
+  border-radius: 12px;
+  padding: 12px;
+}
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.reviewName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.reviewCity {
+  font-size: 12px;
+  color: var(--hint);
+}
+.reviewStars {
+  font-size: 13px;
+  margin-left: auto;
+}
+.reviewText {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.5;
+  margin: 0 0 6px;
+  font-style: italic;
+}
+.reviewDate {
+  font-size: 11px;
+  color: var(--hint);
+}
+.reviewSummary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--secondary-bg, var(--bg));
+  border-radius: 10px;
+  border: 1px solid var(--separator);
+}
+.reviewRating {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+.reviewTotal {
+  font-size: 12px;
+  color: var(--text2);
+}
+
 .footerSpacer { height: 90px; }
 
 /* Sticky footer */
 .footer {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
   padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
   background: var(--bg);
   border-top: 1px solid var(--separator);
@@ -359,21 +552,43 @@
   color: var(--text2);
 }
 
-.bookBtn {
+.footerBtns {
+  display: flex;
+  gap: 8px;
   flex-shrink: 0;
+}
+
+.bookBtnRevolut {
   height: 48px;
-  padding: 0 24px;
+  padding: 0 18px;
   background: var(--accent);
   color: #fff;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   border: none;
   border-radius: 12px;
   cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
   transition: opacity 0.15s;
 }
 
-.bookBtn:disabled {
+.bookBtnDisabled {
   background: var(--hint);
+  pointer-events: none;
+}
+
+.bookBtnBank {
+  height: 48px;
+  padding: 0 14px;
+  background: none;
+  border: 1.5px solid var(--separator);
+  color: var(--hint);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 12px;
   cursor: default;
+  white-space: nowrap;
 }

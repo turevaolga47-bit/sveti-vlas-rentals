@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import useStore from './store/useStore'
 import BottomNav from './components/BottomNav'
+import OfferModal from './components/OfferModal'
+import OnboardingModal from './components/OnboardingModal'
 import SplashScreen from './screens/SplashScreen'
 import DatePickerScreen from './screens/DatePickerScreen'
 import CatalogScreen from './screens/CatalogScreen'
@@ -40,6 +42,12 @@ export default function App() {
       </div>
 
       {SCREENS_WITH_NAV.includes(screen) && <BottomNav />}
+
+      {/* Онбординг — первый запуск (z-index 1000, поверх оффера) */}
+      {screen !== 'splash' && <OnboardingModal />}
+
+      {/* Оффер — показывается один раз после онбординга (z-index 900) */}
+      {screen !== 'splash' && <OfferModal />}
     </>
   )
 }

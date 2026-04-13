@@ -1,0 +1,114 @@
+/* Полупрозрачный фон поверх всего приложения */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 200ms ease;
+}
+
+/* Карточка оффера */
+.card {
+  background: var(--tg-theme-bg-color, #ffffff);
+  border-radius: 20px;
+  padding: 28px 24px 20px;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: slideUp 250ms ease;
+}
+
+/* Крупный эмодзи сверху */
+.emoji {
+  font-size: 56px;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+/* Заголовок */
+.title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--tg-theme-text-color, #000);
+}
+
+/* Подзаголовок */
+.subtitle {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+/* Список буллетов */
+.bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bullet {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--tg-theme-text-color, #000);
+  padding-left: 4px;
+}
+
+/* Главная кнопка */
+.cta {
+  width: 100%;
+  min-height: 52px;
+  background: var(--tg-theme-button-color, #2AABEE);
+  color: var(--tg-theme-button-text-color, #ffffff);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: opacity 150ms ease;
+}
+
+.cta:active {
+  opacity: 0.8;
+}
+
+/* Кнопка «Пропустить» */
+.skip {
+  background: none;
+  border: none;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  min-height: 36px;
+}
+
+.skip:active {
+  opacity: 0.6;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}

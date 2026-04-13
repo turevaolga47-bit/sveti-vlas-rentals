@@ -1,55 +1,73 @@
 import { useState } from 'react'
 import useStore from '../store/useStore'
-import { getNightPrice, calcTotal } from '../data/apartments'
+import { useLang } from '../i18n/useLang'
+import { getNightPrice, calcTotal, getMinPrice, getMaxPrice } from '../data/apartments'
 import NavHeader from '../components/NavHeader'
 import styles from './ApartmentScreen.module.css'
 
 const WHATSAPP = '4917675765576'
 const TELEGRAM = 'OlgaTurevaSv'
+const IBAN = 'LT78 3250 0228 7959 0619'
+const BIC  = 'REVOLT21'
 
-const MONTH_NAMES = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек']
-
-const AMENITY_LABELS = [
-  ['hasAC',       '❄️', 'Кондиционер'],
-  ['hasWifi',     '📶', 'Wi-Fi'],
-  ['hasParking',  '🅿️', 'Парковка'],
-  ['hasPool',     '🏊', 'Бассейн'],
-  ['hasBalcony',  '🌅', 'Балкон'],
-  ['hasWasher',   '🫧', 'Стиральная машина'],
-  ['hasElevator', '🛗', 'Лифт'],
+const AMENITY_KEYS = [
+  ['hasAC',       '❄️'],
+  ['hasWifi',     '📶'],
+  ['hasParking',  '🅿️'],
+  ['hasPool',     '🏊'],
+  ['hasBalcony',  '🌅'],
+  ['hasWasher',   '🫧'],
+  ['hasElevator', '🛗'],
 ]
 
-const RULE_LABELS = [
-  ['noSmoking',   '🚭', 'Не курить (штраф €100)'],
-  ['noPets',      '🐾', 'Без животных (штраф €100)'],
-  ['minChildAge', '👶', (val) => `Дети от ${val} лет`],
-]
+const RULE_KEYS  = ['noSmoking', 'noPets', 'minChildAge']
+const RULE_ICONS = { noSmoking: '🚭', noPets: '🐾', minChildAge: '👶' }
 
 export default function ApartmentScreen() {
   const { selectedApartment: apt, dateFrom, dateTo, navigate, favorites, toggleFavorite } = useStore()
+  const { t, lang } = useLang()
   const [photoIdx, setPhotoIdx] = useState(0)
+  const [ibanCopied, setIbanCopied] = useState(false)
 
   if (!apt) { navigate('catalog'); return null }
 
-  const isFav = favorites.includes(apt.id)
-  const price = getNightPrice(apt, dateFrom)
-  const cost  = calcTotal(apt, dateFrom, dateTo)
+  const locale      = lang === 'de' ? 'de-DE' : lang === 'en' ? 'en-GB' : 'ru-RU'
+  const aptTitle    = apt.titleByLang?.[lang] || apt.title
+  const aptDesc     = apt.descByLang?.[lang]  || apt.description
+  const isFav       = favorites.includes(apt.id)
+  const price     = getNightPrice(apt, dateFrom)
+  const minPrice  = getMinPrice(apt)
+  const maxPrice  = getMaxPrice(apt)
+  const cost      = calcTotal(apt, dateFrom, dateTo)
 
-  const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Здравствуйте, Ольга! Интересует ${apt.title} в Святом Власе.`)}`
+  const fromStr = dateFrom ? new Date(dateFrom).toLocaleDateString(locale) : null
+  const toStr   = dateTo   ? new Date(dateTo).toLocaleDateString(locale)   : null
 
-  function handleBook() {
-    window.open(waLink, '_blank')
+  const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t.apt.waMsg(apt.title, fromStr, toStr, cost?.total))}`
+
+  function copyIban() {
+    navigator.clipboard.writeText(IBAN).catch(() => {})
+    setIbanCopied(true)
+    setTimeout(() => setIbanCopied(false), 2000)
   }
 
   function handleShare() {
-    const tg = window.Telegram?.WebApp
-    const text = `🏖 *${apt.title}*\n€${price}/ночь · ${apt.area} м² · ${apt.beachMinutes} мин до моря\nСвятой Влас, Болгария`
-    tg?.shareMessage?.(text)
+    const priceText = price ? `€${price}${t.apt.perNight}` : `€${minPrice}–${maxPrice}${t.apt.perNight}`
+    const text = `🏖 ${apt.title}\n${priceText} · ${apt.area} ${t.apt.area} · ${apt.beachMinutes} ${t.apt.beach}`
+    const url  = window.location.href
+    if (navigator.share) {
+      navigator.share({ title: apt.title, text, url }).catch(() => {})
+    } else {
+      const tg = window.Telegram?.WebApp
+      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`
+      tg ? tg.openLink(shareUrl) : window.open(shareUrl, '_blank')
+    }
   }
 
   return (
     <div className={styles.wrap}>
       <NavHeader />
+
       {/* Фото галерея */}
       <div className={styles.gallery}>
         <img src={apt.photos[photoIdx]} alt={apt.title} className={styles.photo} />
@@ -61,85 +79,130 @@ export default function ApartmentScreen() {
             />
           ))}
         </div>
-        <button className={styles.fav} onClick={() => toggleFavorite(apt.id)} aria-label="В избранное">
+        <button className={styles.fav} onClick={() => toggleFavorite(apt.id)} aria-label="favourite">
           {isFav ? '❤️' : '🤍'}
         </button>
-        <button className={styles.share} onClick={handleShare} aria-label="Поделиться">📤</button>
+        <button className={styles.share} onClick={handleShare} aria-label="share">📤</button>
         <span className={`${styles.badge} ${apt.available ? styles.badgeFree : styles.badgeBusy}`}>
-          {apt.available ? '✓ Свободно' : '✗ Занято'}
+          {apt.available ? t.catalog.free : t.catalog.busy}
         </span>
         {photoIdx > 0 && (
-          <button className={`${styles.navBtn} ${styles.navPrev}`} onClick={() => setPhotoIdx(i => i - 1)}>‹</button>
+          <button className={`${styles.navBtn} ${styles.navPrev}`} onClick={() => setPhotoIdx(idx => idx - 1)}>‹</button>
         )}
         {photoIdx < apt.photos.length - 1 && (
-          <button className={`${styles.navBtn} ${styles.navNext}`} onClick={() => setPhotoIdx(i => i + 1)}>›</button>
+          <button className={`${styles.navBtn} ${styles.navNext}`} onClick={() => setPhotoIdx(idx => idx + 1)}>›</button>
         )}
       </div>
 
       <div className={styles.content}>
-        {/* Заголовок */}
-        <h1 className={styles.title}>{apt.title}</h1>
-        <div className={styles.meta}>
-          <span>🏖 {apt.beachMinutes} мин до моря</span>
-          <span>👤 до {apt.guests} гостей</span>
-          <span>📐 {apt.area} м²</span>
-          <span>🏢 {apt.floor}/{apt.totalFloors} эт.</span>
+        {/* УТП — полоска доверия */}
+        <div className={styles.utpRow}>
+          <span className={styles.utpItem}>{t.apt.utp1}</span>
+          <span className={styles.utpDot}>·</span>
+          <span className={styles.utpItem}>{t.apt.utp2}</span>
+          <span className={styles.utpDot}>·</span>
+          <span className={styles.utpItem}>{t.apt.utp3}</span>
         </div>
 
-        <p className={styles.desc}>{apt.description}</p>
+        {/* Заголовок */}
+        <h1 className={styles.title}>{aptTitle}</h1>
+        <div className={styles.meta}>
+          <span>🏖 {apt.beachMinutes} {t.apt.beach}</span>
+          <span>👤 {t.apt.guests.replace('{n}', apt.guests)}</span>
+          <span>📐 {apt.area} {t.apt.area}</span>
+          <span>🏢 {apt.floor}/{apt.totalFloors} {t.apt.floor}</span>
+        </div>
+
+        <p className={styles.desc}>{aptDesc}</p>
 
         {/* Цены по месяцам */}
         <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>Цены по месяцам</h3>
+          <h3 className={styles.sectionTitle}>{t.apt.pricesTitle}</h3>
           <div className={styles.priceGrid}>
             {Object.entries(apt.priceByMonth).map(([month, p]) => (
               <div key={month} className={`${styles.priceCell} ${p >= 90 ? styles.priceCellHigh : p >= 60 ? styles.priceCellMid : styles.priceCellLow}`}>
-                <span className={styles.priceCellMonth}>{MONTH_NAMES[+month - 1]}</span>
+                <span className={styles.priceCellMonth}>{t.monthsShort[+month - 1]}</span>
                 <span className={styles.priceCellPrice}>€{p}</span>
-                <span className={styles.priceCellUnit}>/ночь</span>
+                <span className={styles.priceCellUnit}>{t.apt.perNight}</span>
               </div>
             ))}
           </div>
           <div className={styles.priceExtras}>
-            <span>🧹 Уборка: <b>€{apt.cleaningFee}</b> (разово)</span>
-            <span>🔐 Депозит: <b>€{apt.deposit}</b> (возвратный)</span>
+            <span>🧹 {t.apt.cleaning}: <b>€{apt.cleaningFee}</b> {t.apt.depositOnce}</span>
+            <span>🔐 {t.apt.deposit}: <b>€{apt.deposit}</b> {t.apt.depositReturn}</span>
           </div>
         </section>
 
         {/* Расчёт по выбранным датам */}
-        {cost && (
+        {cost ? (
           <section className={styles.section}>
-            <h3 className={styles.sectionTitle}>Ваша бронь</h3>
+            <h3 className={styles.sectionTitle}>{t.apt.yourBooking}</h3>
             <div className={styles.priceTable}>
               <div className={styles.priceRow}>
-                <span>€{cost.pricePerNight} × {cost.nights} {cost.nights === 1 ? 'ночь' : cost.nights < 5 ? 'ночи' : 'ночей'}</span>
+                <span>€{cost.pricePerNight} × {t.apt.nightsShort(cost.nights)}</span>
                 <span>€{cost.rent}</span>
               </div>
               <div className={styles.priceRow}>
-                <span>Уборка</span>
+                <span>{t.apt.cleaning}</span>
                 <span>€{apt.cleaningFee}</span>
               </div>
               <div className={styles.priceRow}>
-                <span>Депозит (возвратный)</span>
+                <span>{t.apt.deposit} {t.apt.depositReturn}</span>
                 <span>€{apt.deposit}</span>
               </div>
               <div className={`${styles.priceRow} ${styles.priceTotal}`}>
-                <span>Итого</span>
+                <span>{t.apt.total}</span>
                 <span>€{cost.total}</span>
               </div>
             </div>
+            <p className={styles.depositNote}>
+              {t.apt.depositNote.replace('{n}', apt.deposit)}
+            </p>
+          </section>
+        ) : (
+          <section className={styles.section}>
+            <p className={styles.noDates}>{t.apt.noDates}</p>
           </section>
         )}
 
+        {/* Оплата */}
+        <section className={styles.section}>
+          <h3 className={styles.sectionTitle}>{t.apt.payTitle}</h3>
+          <div className={styles.paymentBlock}>
+            <div className={styles.paymentRow}>
+              <span className={styles.paymentIcon}>💳</span>
+              <div className={styles.paymentInfo}>
+                <span className={styles.paymentName}>{t.apt.revolut}</span>
+                <span className={styles.paymentDesc}>{t.apt.revolutDesc}</span>
+                <div className={styles.ibanRow}>
+                  <span className={styles.ibanNum}>{IBAN}</span>
+                  <button className={styles.ibanCopyBtn} onClick={copyIban}>
+                    {ibanCopied ? t.apt.ibanCopied : t.apt.ibanCopy}
+                  </button>
+                </div>
+                <span className={styles.ibanBic}>{t.apt.ibanBic}: {BIC}</span>
+              </div>
+            </div>
+            <div className={styles.paymentRow}>
+              <span className={styles.paymentIcon}>🏦</span>
+              <div className={styles.paymentInfo}>
+                <span className={styles.paymentName}>{t.apt.bank}</span>
+                <span className={styles.paymentDesc}>{t.apt.bankDesc}</span>
+              </div>
+              <span className={styles.paymentSoon}>{t.apt.bankSoon}</span>
+            </div>
+          </div>
+        </section>
+
         {/* Удобства */}
         <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>Удобства</h3>
+          <h3 className={styles.sectionTitle}>{t.apt.amenitiesTitle}</h3>
           <div className={styles.amenities}>
-            {AMENITY_LABELS.map(([key, icon, label]) =>
+            {AMENITY_KEYS.map(([key, icon]) =>
               apt[key] ? (
                 <div key={key} className={styles.amenity}>
                   <span className={styles.amenityIcon}>{icon}</span>
-                  <span className={styles.amenityLabel}>{label}</span>
+                  <span className={styles.amenityLabel}>{t.amenities[key]}</span>
                 </div>
               ) : null
             )}
@@ -148,11 +211,12 @@ export default function ApartmentScreen() {
 
         {/* Правила */}
         <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>Правила</h3>
+          <h3 className={styles.sectionTitle}>{t.apt.rulesTitle}</h3>
           <div className={styles.rules}>
-            {RULE_LABELS.map(([key, icon, label]) => {
+            {RULE_KEYS.map((key) => {
               if (!apt[key]) return null
-              const text = typeof label === 'function' ? label(apt[key]) : label
+              const icon = RULE_ICONS[key]
+              const text = typeof t.rules[key] === 'function' ? t.rules[key](apt[key]) : t.rules[key]
               return (
                 <div key={key} className={styles.rule}>
                   <span>{icon}</span>
@@ -165,7 +229,7 @@ export default function ApartmentScreen() {
 
         {/* Хозяйка + контакты */}
         <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>Хозяйка</h3>
+          <h3 className={styles.sectionTitle}>{t.apt.ownerTitle}</h3>
           <div className={styles.owner}>
             {apt.owner.photo
               ? <img src={apt.owner.photo} alt={apt.owner.name} className={styles.ownerPhoto} />
@@ -176,7 +240,10 @@ export default function ApartmentScreen() {
                 {apt.owner.name}
                 {apt.owner.verified && <span className={styles.verified}> ✓</span>}
               </span>
-              <span className={styles.ownerStats}>{apt.owner.bookings} бронирований</span>
+              <span className={styles.ownerStats}>
+                {apt.owner.bookings} {t.apt.ownerBookings} · ⭐ 5.0
+              </span>
+              <span className={styles.ownerTagline}>{t.apt.ownerTagline}</span>
             </div>
           </div>
           <div className={styles.contacts}>
@@ -189,23 +256,62 @@ export default function ApartmentScreen() {
           </div>
         </section>
 
+        {/* Отзывы */}
+        {apt.reviews?.length > 0 && (
+          <section className={styles.section}>
+            <h3 className={styles.sectionTitle}>
+              {t.apt.reviewsTitle}
+              <span className={styles.reviewCount}> ({apt.reviews.length})</span>
+            </h3>
+            <div className={styles.reviewsList}>
+              {apt.reviews.map((r, i) => (
+                <div key={i} className={styles.reviewCard}>
+                  <div className={styles.reviewHeader}>
+                    <span className={styles.reviewName}>{r.name}</span>
+                    <span className={styles.reviewCity}>{r.city}</span>
+                    <span className={styles.reviewStars}>{'⭐'.repeat(r.rating)}</span>
+                  </div>
+                  <p className={styles.reviewText}>"{r.text}"</p>
+                  <span className={styles.reviewDate}>{r.date}</span>
+                </div>
+              ))}
+            </div>
+            <div className={styles.reviewSummary}>
+              <span className={styles.reviewRating}>⭐ 5.0 / 5</span>
+              <span className={styles.reviewTotal}>{t.apt.reviewSummary.replace('{n}', apt.owner.bookings)}</span>
+            </div>
+          </section>
+        )}
+
         {/* FAQ ссылка */}
         <button className={styles.faqBtn} onClick={() => navigate('faq')}>
-          ❓ Частые вопросы · Виза · Трансфер
+          {t.apt.faqBtn}
         </button>
 
         <div className={styles.footerSpacer} />
       </div>
 
-      {/* Кнопка бронирования */}
+      {/* Футер: цена + две кнопки оплаты */}
       <div className={styles.footer}>
         <div className={styles.footerPrice}>
-          <span className={styles.footerPriceMain}>€{price} <small>/ночь</small></span>
-          {cost && <span className={styles.footerPriceTotal}>итого €{cost.total}</span>}
+          {price
+            ? <span className={styles.footerPriceMain}>€{price} <small>{t.apt.perNight}</small></span>
+            : <span className={styles.footerPriceMain}>€{minPrice}–{maxPrice} <small>{t.apt.perNight}</small></span>
+          }
+          {cost && <span className={styles.footerPriceTotal}>{t.apt.total.toLowerCase()} €{cost.total}</span>}
         </div>
-        <button className={styles.bookBtn} disabled={!apt.available} onClick={handleBook}>
-          {apt.available ? '💬 Забронировать' : 'Занято'}
-        </button>
+        <div className={styles.footerBtns}>
+          <button
+            className={`${styles.bookBtnRevolut} ${!apt.available ? styles.bookBtnDisabled : ''}`}
+            onClick={apt.available ? copyIban : undefined}
+            disabled={!apt.available}
+          >
+            {!apt.available ? t.apt.busyBtn : ibanCopied ? t.apt.ibanCopied : t.apt.bookBtn}
+          </button>
+          <button className={styles.bookBtnBank} disabled>
+            🏦 {t.apt.bankSoon}
+          </button>
+        </div>
       </div>
     </div>
   )
