@@ -143,14 +143,36 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true })
   }
 
-  // /myid и /admin — показывают chat_id для настройки уведомлений
+  // /myid и /admin — панель владельца
   if (text === '/myid' || text === '/admin') {
     await call('sendMessage', {
       chat_id: chatId,
       text:
-        `🔑 *Ваш Chat ID:*\n\`${chatId}\`\n\n` +
-        `Пришлите это число разработчику — он настроит уведомления о бронированиях.`,
+        `🏠 *Панель владельца — ApartmenRentals*\n\n` +
+
+        `*Что разработано:*\n` +
+        `✅ Mini App — каталог 2 квартир с фото, ценами, отзывами\n` +
+        `✅ Выбор дат и расчёт стоимости по месяцам\n` +
+        `✅ Форма заявки → уведомление вам в Telegram\n` +
+        `✅ Мультиязычность: 🇷🇺 🇬🇧 🇩🇪\n` +
+        `✅ Онбординг и оффер (скидка 15%) — по одному разу\n` +
+        `✅ Страница оплаты: Revolut IBAN + болгарский банк\n` +
+        `✅ FAQ: виза, трансфер, заселение, правила\n` +
+        `✅ Профиль хозяйки с контактами и отзывами\n` +
+        `✅ Блок «Оставьте отзыв» в профиле\n` +
+        `✅ Бот: /start с фото, /help, мультиязык\n\n` +
+
+        `*Ссылки:*\n` +
+        `🌐 Mini App: https://tg-app-gold.vercel.app\n` +
+        `💻 GitHub: github.com/turevaolga47-bit/sveti-vlas-rentals\n\n` +
+
+        `*Ваш Chat ID:* \`${chatId}\``,
       parse_mode: 'Markdown',
+      reply_markup: {
+        inline_keyboard: [[
+          { text: '🏖 Открыть Mini App', web_app: { url: 'https://tg-app-gold.vercel.app' } }
+        ]]
+      }
     })
     return res.status(200).json({ ok: true })
   }
