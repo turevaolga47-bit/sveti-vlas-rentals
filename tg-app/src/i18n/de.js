@@ -146,6 +146,25 @@ export default {
     appInfo: 'Sveti Vlas · Ferienwohnungen am Meer',
   },
 
+  bookingForm: {
+    title:              'Buchungsanfrage senden',
+    name:               'Ihr Name',
+    namePlaceholder:    'Max Mustermann',
+    contact:            'Telefon oder Telegram',
+    contactPlaceholder: '+49 … oder @username',
+    guests:             'Anzahl der Gäste',
+    comment:            'Kommentar (optional)',
+    commentPlaceholder: 'Ankunftszeit, besondere Wünsche…',
+    nightsShort:        'Nächte',
+    total:              'Gesamt',
+    submit:             '📩 Anfrage senden',
+    sending:            'Wird gesendet…',
+    errorMsg:           'Fehler beim Senden. Bitte erneut versuchen oder per WhatsApp kontaktieren.',
+    successTitle:       'Anfrage gesendet!',
+    successText:        'Olga hat Ihre Anfrage erhalten und meldet sich in Kürze.',
+    close:              'Prima, ich warte auf Antwort!',
+  },
+
   onboarding: {
     greeting:     'Willkommen! 👋',
     greetingName: 'Hallo, {name}! 👋',

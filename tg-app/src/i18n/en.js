@@ -146,6 +146,25 @@ export default {
     appInfo: 'Sveti Vlas · Seaside apartments',
   },
 
+  bookingForm: {
+    title:              'Send booking request',
+    name:               'Your name',
+    namePlaceholder:    'John Smith',
+    contact:            'Phone or Telegram',
+    contactPlaceholder: '+49 … or @username',
+    guests:             'Number of guests',
+    comment:            'Comment (optional)',
+    commentPlaceholder: 'Arrival time, special requests…',
+    nightsShort:        'nights',
+    total:              'Total',
+    submit:             '📩 Send request',
+    sending:            'Sending…',
+    errorMsg:           'Failed to send. Please try again or contact via WhatsApp.',
+    successTitle:       'Request sent!',
+    successText:        'Olga received your request and will get back to you shortly.',
+    close:              'Great, waiting for reply!',
+  },
+
   onboarding: {
     greeting:     'Welcome! 👋',
     greetingName: 'Hi, {name}! 👋',

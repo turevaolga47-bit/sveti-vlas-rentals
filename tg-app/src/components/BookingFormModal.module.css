@@ -1,0 +1,226 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 200ms ease;
+}
+
+/* Карточка снизу (sheet-стиль) */
+.card {
+  background: var(--tg-theme-bg-color, #fff);
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 480px;
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 20px 20px 32px;
+  animation: slideUp 250ms ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--tg-theme-text-color, #000);
+  margin: 0;
+}
+
+.closeIcon {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+/* Сводка бронирования */
+.summary {
+  background: var(--tg-theme-secondary-bg-color, #f4f4f5);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summaryApt {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--tg-theme-text-color, #000);
+}
+
+.summaryDates {
+  font-size: 13px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.summaryTotal {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--tg-theme-button-color, #2AABEE);
+  margin-top: 2px;
+}
+
+/* Форма */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  margin-top: 8px;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1.5px solid var(--tg-theme-secondary-bg-color, #e5e5ea);
+  border-radius: 10px;
+  font-size: 16px;
+  color: var(--tg-theme-text-color, #000);
+  background: var(--tg-theme-bg-color, #fff);
+  box-sizing: border-box;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--tg-theme-button-color, #2AABEE);
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--tg-theme-secondary-bg-color, #e5e5ea);
+  border-radius: 10px;
+  font-size: 15px;
+  color: var(--tg-theme-text-color, #000);
+  background: var(--tg-theme-bg-color, #fff);
+  box-sizing: border-box;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+}
+
+.textarea:focus {
+  border-color: var(--tg-theme-button-color, #2AABEE);
+}
+
+/* Счётчик гостей */
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.counterBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--tg-theme-button-color, #2AABEE);
+  background: none;
+  color: var(--tg-theme-button-color, #2AABEE);
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.counterVal {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--tg-theme-text-color, #000);
+  min-width: 24px;
+  text-align: center;
+}
+
+/* Кнопка отправки */
+.submitBtn {
+  width: 100%;
+  min-height: 52px;
+  background: var(--tg-theme-button-color, #2AABEE);
+  color: var(--tg-theme-button-text-color, #fff);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 14px;
+  transition: opacity 150ms;
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.errorMsg {
+  color: #ff3b30;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+/* Экран успеха */
+.successEmoji {
+  font-size: 52px;
+  text-align: center;
+  margin: 16px 0 12px;
+}
+
+.successTitle {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--tg-theme-text-color, #000);
+  margin: 0 0 8px;
+}
+
+.successText {
+  font-size: 14px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0 0 24px;
+}
+
+.closeBtn {
+  width: 100%;
+  min-height: 52px;
+  background: var(--tg-theme-button-color, #2AABEE);
+  color: var(--tg-theme-button-text-color, #fff);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}

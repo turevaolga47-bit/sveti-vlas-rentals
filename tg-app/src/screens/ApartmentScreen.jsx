@@ -3,6 +3,7 @@ import useStore from '../store/useStore'
 import { useLang } from '../i18n/useLang'
 import { getNightPrice, calcTotal, getMinPrice, getMaxPrice } from '../data/apartments'
 import NavHeader from '../components/NavHeader'
+import BookingFormModal from '../components/BookingFormModal'
 import styles from './ApartmentScreen.module.css'
 
 const WHATSAPP = '4917675765576'
@@ -28,6 +29,7 @@ export default function ApartmentScreen() {
   const { t, lang } = useLang()
   const [photoIdx, setPhotoIdx] = useState(0)
   const [ibanCopied, setIbanCopied] = useState(false)
+  const [showForm, setShowForm] = useState(false)
 
   if (!apt) { navigate('catalog'); return null }
 
@@ -291,6 +293,16 @@ export default function ApartmentScreen() {
         <div className={styles.footerSpacer} />
       </div>
 
+      {showForm && (
+        <BookingFormModal
+          apt={apt}
+          dateFrom={dateFrom}
+          dateTo={dateTo}
+          cost={cost}
+          onClose={() => setShowForm(false)}
+        />
+      )}
+
       {/* Футер: цена + две кнопки оплаты */}
       <div className={styles.footer}>
         <div className={styles.footerPrice}>
@@ -303,10 +315,10 @@ export default function ApartmentScreen() {
         <div className={styles.footerBtns}>
           <button
             className={`${styles.bookBtnRevolut} ${!apt.available ? styles.bookBtnDisabled : ''}`}
-            onClick={apt.available ? copyIban : undefined}
+            onClick={apt.available ? () => setShowForm(true) : undefined}
             disabled={!apt.available}
           >
-            {!apt.available ? t.apt.busyBtn : ibanCopied ? t.apt.ibanCopied : t.apt.bookBtn}
+            {!apt.available ? t.apt.busyBtn : t.apt.bookBtn}
           </button>
           <button className={styles.bookBtnBank} disabled>
             🏦 {t.apt.bankSoon}
