@@ -140,6 +140,28 @@ export default function ProfileScreen() {
         </button>
       </div>
 
+      {/* Отзыв */}
+      <div className={styles.feedbackBlock}>
+        <p className={styles.feedbackTitle}>{t.profile.feedbackTitle}</p>
+        <p className={styles.feedbackSub}>{t.profile.feedbackSub}</p>
+        <div className={styles.feedbackBtns}>
+          <a
+            href={`https://wa.me/4917675765576?text=${encodeURIComponent(t.profile.feedbackWaMsg)}`}
+            className={styles.feedbackBtn}
+            target="_blank" rel="noreferrer"
+          >
+            💬 WhatsApp
+          </a>
+          <a
+            href={`https://t.me/OlgaTurevaSv?text=${encodeURIComponent(t.profile.feedbackWaMsg)}`}
+            className={styles.feedbackBtn}
+            target="_blank" rel="noreferrer"
+          >
+            ✈️ Telegram
+          </a>
+        </div>
+      </div>
+
       <p className={styles.appInfo}>
         {t.profile.appInfo}<br />
         <span className={styles.version}>v1.1</span>

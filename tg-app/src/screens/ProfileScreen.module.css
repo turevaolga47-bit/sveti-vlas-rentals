@@ -268,3 +268,48 @@
 }
 
 .version { font-size: 11px; opacity: 0.7; }
+
+/* Блок «Оставьте отзыв» */
+.feedbackBlock {
+  background: var(--secondary-bg);
+  border-radius: 16px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feedbackTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.feedbackSub {
+  font-size: 13px;
+  color: var(--hint);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.feedbackBtns {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.feedbackBtn {
+  flex: 1;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--btn-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}

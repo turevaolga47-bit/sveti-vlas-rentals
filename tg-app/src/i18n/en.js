@@ -143,6 +143,9 @@ export default {
       bookings: 'My bookings',
       faq: 'FAQ · Visa · Transfer',
     },
+    feedbackTitle: '⭐ Leave a review',
+    feedbackSub:   'Share your experience — it helps other guests',
+    feedbackWaMsg: 'Hello, Olga! I would like to share my feedback about the stay.',
     appInfo: 'Sveti Vlas · Seaside apartments',
   },
 

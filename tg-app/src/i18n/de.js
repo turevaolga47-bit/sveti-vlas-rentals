@@ -143,6 +143,9 @@ export default {
       bookings: 'Meine Buchungen',
       faq: 'FAQ · Visum · Transfer',
     },
+    feedbackTitle: '⭐ Bewertung hinterlassen',
+    feedbackSub:   'Teilen Sie Ihre Erfahrung — das hilft anderen Gästen',
+    feedbackWaMsg: 'Hallo, Olga! Ich möchte meine Erfahrungen über den Aufenthalt teilen.',
     appInfo: 'Sveti Vlas · Ferienwohnungen am Meer',
   },
 
