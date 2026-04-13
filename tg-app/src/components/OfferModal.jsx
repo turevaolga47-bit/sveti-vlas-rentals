@@ -3,7 +3,7 @@ import { useLang } from '../i18n/useLang'
 import styles from './OfferModal.module.css'
 
 // TODO: заменить на реальный username бота после создания через @BotFather
-const BOT_USERNAME = 'sveti_vlas_bot'
+const BOT_USERNAME = 'ApartmenRentals_bot'
 const STORAGE_KEY  = 'svlas_offer_seen'
 
 function hasSeenOffer() {
