@@ -143,11 +143,13 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true })
   }
 
-  // /myid — показывает chat_id (нужен для настройки уведомлений)
-  if (text === '/myid') {
+  // /myid и /admin — показывают chat_id для настройки уведомлений
+  if (text === '/myid' || text === '/admin') {
     await call('sendMessage', {
       chat_id: chatId,
-      text: `Ваш Chat ID: \`${chatId}\`\n\nСкопируйте это число и передайте администратору.`,
+      text:
+        `🔑 *Ваш Chat ID:*\n\`${chatId}\`\n\n` +
+        `Пришлите это число разработчику — он настроит уведомления о бронированиях.`,
       parse_mode: 'Markdown',
     })
     return res.status(200).json({ ok: true })
