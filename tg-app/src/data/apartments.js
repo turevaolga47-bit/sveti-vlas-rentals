@@ -49,6 +49,10 @@ export const APARTMENTS = [
       en: 'Wake up in a bright third-floor apartment — in 3 minutes you\'re on the sand. Two bedrooms with 160×200 beds, a balcony, powerful A/C and fast Wi-Fi. New build 2025 — everything brand new: finishes, furniture, appliances. Fresh produce market 50 m away, 20+ restaurants nearby. Olga meets you personally: keys handed over, contract signed at check-in.',
       de: 'Wachen Sie in einer hellen Wohnung im 3. Stock auf — in 3 Minuten sind Sie am Strand. Zwei Schlafzimmer (160×200-Betten), Balkon, leistungsstarke Klimaanlage, schnelles WLAN. Neubau 2025 — alles neu: Einrichtung, Möbel, Geräte. Frischemarkt 50 m entfernt, 20+ Restaurants in der Nähe. Olga empfängt Sie persönlich: Schlüssel übergeben, Mietvertrag beim Check-in unterzeichnet.',
     },
+    videos: [
+      { id: 'fJWIBKBH0XM', title: '🏖 Пляж · 3 минуты ходьбы' },
+      { id: 'XciJab2tu98', title: '🏠 Тур по квартире' },
+    ],
     reviews: [
       { name: 'Анна П.',     city: 'Москва',        date: 'Май 2025',    rating: 5, text: 'Всё как на фото — чисто, ново, светло. Ольга встретила нас с детьми, показала квартиру, всё объяснила. До пляжа реально 3 минуты. Вернёмся обязательно!' },
       { name: 'Иван М.',     city: 'СПб',           date: 'Июль 2025',   rating: 5, text: 'Кондиционер мощный, Wi-Fi хороший, базар рядом — каждое утро свежие фрукты. Ольга всегда на связи. Отличный отдых!' },
@@ -106,6 +110,10 @@ export const APARTMENTS = [
       en: 'Cosy second-floor apartment — step out of the entrance and in 3 minutes you\'re at the sea. Two bedrooms, spacious balcony, A/C, washing machine, fully equipped kitchen. New build 2025 — everything works perfectly. Parking in the yard. Olga meets you personally at check-in and signs an official rental contract.',
       de: 'Gemütliche Wohnung im 2. Stock — treten Sie aus dem Eingang und in 3 Minuten sind Sie am Meer. Zwei Schlafzimmer, geräumiger Balkon, Klimaanlage, Waschmaschine, voll ausgestattete Küche. Neubau 2025 — alles funktioniert tadellos. Parkplatz im Hof. Olga empfängt Sie persönlich beim Check-in und unterzeichnet einen offiziellen Mietvertrag.',
     },
+    videos: [
+      { id: 'VqMSJ3d6nTA', title: '🏠 Тур по квартире' },
+      { id: '2X7USIJ07Rg', title: '🌅 Закат над морем' },
+    ],
     reviews: [
       { name: 'Дмитрий Л.', city: 'Краснодар',    date: 'Июнь 2025',      rating: 5, text: 'Прекрасное место для пары. Тихо, уютно, новый ремонт. Вышли утром — сразу на пляж. Ольга очень приятный человек, встретила с улыбкой.' },
       { name: 'Наталья В.', city: 'Новосибирск',  date: 'Сентябрь 2025',  rating: 5, text: 'Брали в сентябре — море ещё тёплое, людей меньше, цена ниже. Квартира чистая, всё новое. Рекомендую всем!' },

@@ -88,6 +88,7 @@ export default {
     ownerTagline: 'Встречаю лично, подписываем договор при заселении',
     reviewsTitle: 'Отзывы гостей',
     reviewSummary: 'на основе {n} бронирований',
+    videosTitle: 'Видео-тур',
     faqBtn: '❓ Частые вопросы · Виза · Трансфер',
     bookBtn: '💳 Revolut',
     busyBtn: 'Занято',

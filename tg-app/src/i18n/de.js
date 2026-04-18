@@ -83,6 +83,7 @@ export default {
     ownerTagline: 'Ich begrüße jeden Gast persönlich und unterzeichne einen Mietvertrag',
     reviewsTitle: 'Gästebewertungen',
     reviewSummary: 'basierend auf {n} Buchungen',
+    videosTitle: 'Videorundgang',
     faqBtn: '❓ FAQ · Visum · Transfer',
     bookBtn: '💳 Revolut',
     busyBtn: 'Gebucht',

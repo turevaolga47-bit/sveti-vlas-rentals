@@ -258,6 +258,36 @@ export default function ApartmentScreen() {
           </div>
         </section>
 
+        {/* Видео-тур */}
+        {apt.videos?.length > 0 && (
+          <section className={styles.section}>
+            <h3 className={styles.sectionTitle}>{t.apt.videosTitle}</h3>
+            <div className={styles.videoList}>
+              {apt.videos.map((v) => (
+                <button
+                  key={v.id}
+                  className={styles.videoCard}
+                  onClick={() => {
+                    const url = `https://youtube.com/shorts/${v.id}`
+                    const tg = window.Telegram?.WebApp
+                    tg ? tg.openLink(url) : window.open(url, '_blank')
+                  }}
+                >
+                  <div className={styles.videoThumbWrap}>
+                    <img
+                      src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`}
+                      alt={v.title}
+                      className={styles.videoThumb}
+                    />
+                    <span className={styles.videoPlay}>▶</span>
+                  </div>
+                  <span className={styles.videoTitle}>{v.title}</span>
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Отзывы */}
         {apt.reviews?.length > 0 && (
           <section className={styles.section}>

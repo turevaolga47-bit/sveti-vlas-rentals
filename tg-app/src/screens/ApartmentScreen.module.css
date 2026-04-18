@@ -592,3 +592,58 @@
   cursor: default;
   white-space: nowrap;
 }
+
+
+/* Видео-тур */
+.videoList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.videoCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.videoThumbWrap {
+  position: relative;
+  width: 120px;
+  min-width: 120px;
+  height: 68px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--secondary-bg);
+  flex-shrink: 0;
+}
+
+.videoThumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.videoPlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  font-size: 22px;
+}
+
+.videoTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}

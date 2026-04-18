@@ -83,6 +83,7 @@ export default {
     ownerTagline: 'I meet every guest personally and sign a contract on arrival',
     reviewsTitle: 'Guest reviews',
     reviewSummary: 'based on {n} bookings',
+    videosTitle: 'Video tour',
     faqBtn: '❓ FAQ · Visa · Transfer',
     bookBtn: '💳 Revolut',
     busyBtn: 'Booked',
